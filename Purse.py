@@ -1,11 +1,11 @@
 class Purse():
-	def __init__(self,valuta,name = "Uknow" , course):
+	def __init__(self,valuta,course,name = "Uknow" ):
 		self.money = 0.00
 		self.valuta  = valuta
 		self.name = name
-		self.course = 0.94
+		self.course = course
 	def info(self):
-		print(self.money ,self.valuta)
+		print(self.money ,self.valuta ,"Курс " ,self.course,"+")
 
 	def top_up_balance(self,howmany):
 		self.money = self.money + howmany
