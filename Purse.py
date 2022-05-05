@@ -1,19 +1,20 @@
 class Purse():
-	def __init__(self,valuta,course,name = "Uknow" ):
-		self.money = 0.00
+	def __init__(self,valuta,course,name = "Uknow"):
+		self.__money = 0.00
 		self.valuta  = valuta
-		self.name = name
 		self.course = course
+		self.name = name
+
 	def info(self):
-		print(self.money ,self.valuta ,"Курс " ,self.course,"+")
+		print(self.course , self.__money,self.valuta,self.name)
 
 	def top_up_balance(self,howmany):
-		self.money = self.money + howmany
+		self.__money = self.__money + howmany
 
 	def top_down_balance(self,howmany):
-		if self.money - howmany < 0 :
+		if self.__money - howmany < 0 :
 			print("Не достаточно средств")
 		else:
-			self.money = self.money - howmany
+			self.__money = self.__money - howmany
 	def transfer(self):
-		self.money * self.course
+		self.__money * self.course
