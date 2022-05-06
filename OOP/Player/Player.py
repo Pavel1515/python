@@ -17,6 +17,8 @@ class Player():
 
     def info(self):
         print(self.__born)
-c = Player()
-c.lvl  = 100
-print(c.lvl)
+    
+    @classmethod
+    def set_cls_field (cls , lvl = 1 , health = 100):
+        cls.__LVL  = lvl
+        cls.__HEALTH = health
