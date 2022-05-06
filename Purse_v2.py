@@ -9,6 +9,6 @@ class V2(Purse):
 
 
 
-c  = V2("USD", 9,"Pavlo" )
+c  = V2("USD", 9,'Pavlo')
 c.top_up_balance(1000) 
 c.info()
