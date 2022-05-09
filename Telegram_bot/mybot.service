@@ -1,0 +1,14 @@
+[Unit]
+Description=bot
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=//home/pavlo/Документы/python/Telegram_bot
+ExecStart=/home/pavlo/Документы/python/Telegram_bot/app.py
+KillMode=process
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
