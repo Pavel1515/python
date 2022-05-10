@@ -1,8 +1,7 @@
-import config
+from config import times , TOKEN , api_keys
 from telebot import types,telebot
 import requests
-from datetime import datetime 
-bot = telebot.TeleBot(config.TOKEN)
+bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(content_types = ["text"])
 def message_start(message):
@@ -14,13 +13,12 @@ def message_start(message):
 @bot.message_handler(content_types=["text"])
 def repetrear(message):
     try:
-        time = datetime.today().strftime("%H:%M")
         valuta  = requests.get("https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json")
         valuta = valuta.json()
         USD  = valuta[25]["rate"]
         EUR = valuta[32]["rate"] 
         PLN  = valuta[33]["rate"]
-        api  = f"https://api.openweathermap.org/data/2.5/weather?q={message.text}&appid={config.api_keys}&units=metric"
+        api  = f"https://api.openweathermap.org/data/2.5/weather?q={message.text}&appid={api_keys}&units=metric"
         res = requests.get(api)
         data= res.json()
         name = data['name']
@@ -29,7 +27,7 @@ def repetrear(message):
         conntry = data['sys']['country']
         bot.send_message(message.chat.id, f"\U0001F3E1 \U0001F3E1 \U0001F3E1Місто:  {name}\nТемпература: {temp} C\nВідчуваеться: {fleels_like } C\n\U0001F680Країна:\U0001F680{conntry}\
             \nКурс Долара : {USD}\nКурс Евро : {EUR}\nКурс Злотого : {PLN}\
-            \n Час: {time}")
+            \n Час: {times}")
     except:
         bot.send_message(message.chat.id, " Введите правильно город ")
 
