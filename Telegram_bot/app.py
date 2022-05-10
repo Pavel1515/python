@@ -1,4 +1,5 @@
-from config import times , TOKEN , api_keys
+from config import TOKEN , api_keys, UTC0530
+from datetime import tzinfo, timedelta, datetime, timezone
 from telebot import types,telebot
 import requests
 bot = telebot.TeleBot(TOKEN)
@@ -13,10 +14,12 @@ def message_start(message):
 @bot.message_handler(content_types=["text"])
 def repetrear(message):
     try:
+        times= datetime.now(UTC0530())
+        times = times.strftime("%H:%M")
         valuta  = requests.get("https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json")
         valuta = valuta.json()
         USD  = valuta[25]["rate"]
-        EUR = valuta[32]["rate"] 
+        EUR = valuta[32]["rate"]
         PLN  = valuta[33]["rate"]
         api  = f"https://api.openweathermap.org/data/2.5/weather?q={message.text}&appid={api_keys}&units=metric"
         res = requests.get(api)
