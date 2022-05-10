@@ -1,8 +1,7 @@
 import config
-import telebot
-from telebot import types
+from telebot import types,telebot
 import requests
-
+from datetime import datetime 
 bot = telebot.TeleBot(config.TOKEN)
 
 @bot.message_handler(content_types = ["text"])
@@ -15,6 +14,7 @@ def message_start(message):
 @bot.message_handler(content_types=["text"])
 def repetrear(message):
     try:
+        time = datetime.today().strftime("%H:%M")
         valuta  = requests.get("https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json")
         valuta = valuta.json()
         USD  = valuta[25]["rate"]
@@ -28,7 +28,8 @@ def repetrear(message):
         fleels_like = int(data['main']['feels_like'])
         conntry = data['sys']['country']
         bot.send_message(message.chat.id, f"\U0001F3E1 \U0001F3E1 \U0001F3E1Місто:  {name}\nТемпература: {temp} C\nВідчуваеться: {fleels_like } C\n\U0001F680Країна:\U0001F680{conntry}\
-            \nКурс Долара : {USD}\nКурс Евро : {EUR}\nКурс Злотого : {PLN}")
+            \nКурс Долара : {USD}\nКурс Евро : {EUR}\nКурс Злотого : {PLN}\
+            \n Час: {time}")
     except:
         bot.send_message(message.chat.id, " Введите правильно город ")
 
