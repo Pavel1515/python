@@ -2,6 +2,8 @@ from config import TOKEN , api_keys, UTC0530
 from datetime import tzinfo, timedelta, datetime, timezone
 from telebot import types,telebot
 import requests
+
+
 bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(content_types = ["text"])
@@ -14,7 +16,7 @@ def message_start(message):
 @bot.message_handler(content_types=["text"])
 def repetrear(message):
     try:
-        times= datetime.now(UTC0530())
+        times= datetime.now(UTC0530())  
         times = times.strftime("%H:%M")
         valuta  = requests.get("https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json")
         valuta = valuta.json()
@@ -28,9 +30,10 @@ def repetrear(message):
         temp = int(data['main']['temp'])
         fleels_like = int(data['main']['feels_like'])
         conntry = data['sys']['country']
-        bot.send_message(message.chat.id, f"\U0001F3E1 \U0001F3E1 \U0001F3E1Місто:  {name}\nТемпература: {temp} C\nВідчуваеться: {fleels_like } C\n\U0001F680Країна:\U0001F680{conntry}\
-            \nКурс Долара : {USD}\nКурс Евро : {EUR}\nКурс Злотого : {PLN}\
-            \n Час: {times}")
+        bot.send_message(message.chat.id, f"\U0001F3E1 \U0001F3E1 \U0001F3E1Город:  {name}\
+        \nТемпература: {temp} ℃\nОщущение: {fleels_like } ℃\
+        \n\U0001F680Страна:\U0001F680{conntry}\
+        \nВремя: {times}")
     except:
         bot.send_message(message.chat.id, " Введите правильно город ")
 
