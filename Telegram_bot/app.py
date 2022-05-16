@@ -1,9 +1,3 @@
-from gc import callbacks
-from importlib.resources import contents
-from msilib.schema import tables
-from sqlite3 import connect
-from traceback import print_tb
-from unicodedata import name
 from config import TOKEN , api_keys, UTC0530
 from datetime import tzinfo, timedelta, datetime, timezone
 from telebot import types,telebot
